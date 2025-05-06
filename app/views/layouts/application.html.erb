@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Q&A App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+</head>
+<body>
+  <% if notice %>
+    <p style="color: green;"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p style="color: red;"><%= alert %></p>
+  <% end %>
+
+  <% if logged_in? %>
+  <%= link_to 'Logout', logout_path %>
+
+<% else %>
+  <%= link_to 'Login', login_path %> | <%= link_to 'Signup', signup_path %>
+<% end %>
+
+
+  <hr>
+  <%= yield %>
+</body>
+</html>

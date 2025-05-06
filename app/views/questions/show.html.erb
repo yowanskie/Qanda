@@ -1,0 +1,25 @@
+<%= link_to 'Back', request.referer || root_path, class: 'btn btn-secondary' %>
+<h1><%= @question.title %></h1>
+
+<p><%= @question.body %></p>
+<p>Posted by: <%= @question.user.name %></p>
+<p>Upvotes: <%= @question.upvotes %></p>
+
+<% if logged_in? %>
+  <%= button_to "Upvote", upvote_question_path(@question), method: :post %>
+<% end %>
+
+<hr>
+
+<h2>Comments</h2>
+<% @question.comments.each do |comment| %>
+  <p><strong><%= comment.user.name %>:</strong> <%= comment.body %></p>
+<% end %>
+
+<% if logged_in? %>
+  <h3>Add Comment</h3>
+  <%= form_with model: [@question, @comment], local: true do |f| %>
+    <p><%= f.text_area :body %></p>
+    <%= f.submit "Post Comment" %>
+  <% end %>
+<% end %>
